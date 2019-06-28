@@ -23,13 +23,52 @@ Things you may want to cover:
 
 * ...
 
-## membersテーブル
 
+## messagesテーブル
 |Column|Type|Options|
 |------|----|-------|
+|body|text||
+|image|string||
 |user_id|integer|null: false, foreign_key: true|
 |group_id|integer|null: false, foreign_key: true|
 
 ### Association
-- belongs_to :group
 - belongs_to :user
+- belongs_to :group
+
+## usersテーブル
+
+|Column|Type|Options|
+|------|----|-------|
+|name|string|unique: true, null: false|
+|email|string|add_index :users, email, unique: true, null: false|
+|password|string|add_index :users, password, unique: true, null: false|
+|group_id|integer|foreign_key: true, null: false|
+
+### Association
+- has_many :messages
+- has_many :members
+- has_many :groups, trough: members
+
+## groupsテーブル
+
+|Column|Type|Options|
+|------|----|-------|
+|group_name|string|null: false|
+|user_id|integer|foreign_key: true, null: false|
+
+### Association
+- has_many :messages
+- has_many :members
+- has_many :users, trough: members
+
+## membersテーブル
+
+|Column|Type|Options|
+|------|----|-------|
+|users_id|integer|null: false, foreign_key: true|
+|groups_id|integer|null: false, foreign_key: true|
+
+### Association
+- belongs_to :user
+- belongs_to :group
