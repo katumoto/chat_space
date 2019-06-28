@@ -43,7 +43,6 @@ Things you may want to cover:
 |name|string|unique: true, null: false|
 |email|string|add_index :users, email, unique: true, null: false|
 |password|string|add_index :users, password, unique: true, null: false|
-|group_id|integer|foreign_key: true, null: false|
 
 ### Association
 - has_many :messages
@@ -54,8 +53,7 @@ Things you may want to cover:
 
 |Column|Type|Options|
 |------|----|-------|
-|group_name|string|null: false|
-|user_id|integer|foreign_key: true, null: false|
+|name|string|null: false|
 
 ### Association
 - has_many :messages
