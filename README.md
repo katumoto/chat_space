@@ -29,8 +29,8 @@ Things you may want to cover:
 |------|----|-------|
 |body|text||
 |image|string||
-|user_id|integer|null: false, foreign_key: true|
-|group_id|integer|null: false, foreign_key: true|
+|user|references|null: false, foreign_key: true|
+|group|references|null: false, foreign_key: true|
 
 ### Association
 - belongs_to :user
@@ -40,14 +40,14 @@ Things you may want to cover:
 
 |Column|Type|Options|
 |------|----|-------|
-|name|string|unique: true, null: false|
+|name|string|add_index :users, name, unique: true, null: false|
 |email|string|add_index :users, email, unique: true, null: false|
 |password|string|add_index :users, password, unique: true, null: false|
 
 ### Association
 - has_many :messages
 - has_many :members
-- has_many :groups, trough: members
+- has_many :groups, through: :members
 
 ## groupsテーブル
 
@@ -58,14 +58,14 @@ Things you may want to cover:
 ### Association
 - has_many :messages
 - has_many :members
-- has_many :users, trough: members
+- has_many :users, through: :members
 
 ## membersテーブル
 
 |Column|Type|Options|
 |------|----|-------|
-|users_id|integer|null: false, foreign_key: true|
-|groups_id|integer|null: false, foreign_key: true|
+|users|references|null: false, foreign_key: true|
+|groups|references|null: false, foreign_key: true|
 
 ### Association
 - belongs_to :user
