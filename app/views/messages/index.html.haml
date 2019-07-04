@@ -1,0 +1,59 @@
+.Wrapper
+  .Wrapper--chat-list
+    .Wrapper--chat-list-header
+      .Wrapper--chat-list-header--header-box
+        %p{class: "Wrapper--chat-list-header--header-box__name"}
+          test-user
+        %ul{class: "Wrapper--chat-list-header--header-box__menu"}
+          %li{class: "Wrapper--chat-list-header--header-box__menu-new-group"}
+            = link_to "/" do
+              %i.fa.fa-edit
+          %li{class: "Wrapper--chat-list-header--header-box__menu-edit-account"}
+            = link_to "/" do
+              %i.fa.fa-cog
+
+    .Wrapper--chat-list-groups
+      .Wrapper--chat-list-groups__group
+        %p{class: "Wrapper--chat-list-groups__group-name"} test-group
+        %p{class: "Wrapper--chat-list-groups__group-message"} さようなら
+      .Wrapper--chat-list-groups__group
+        %p{class: "Wrapper--chat-list-groups__group-name"} sample-group
+        %p{class: "Wrapper--chat-list-groups__group-message"} hello!
+      .Wrapper--chat-list-groups__group
+        %p{class: "Wrapper--chat-list-groups__group-name"} example
+        %p{class: "Wrapper--chat-list-groups__group-message"} まだメッセージはありません
+
+  .Wrapper--chat-contents
+    .Wrapper--chat-contents--title
+      .Wrapper--chat-contents--title-text-box
+        %p{class: "Wrapper--chat-contents--title-text-box__name"} サンプル
+        %p{class: "Wrapper--chat-contents--title-text-box__member"} member : test-user
+
+      .Wrapper--chat-contents--title-text-box__edit-btn
+        = link_to "/", class: "Wrapper--chat-contents--title-text-box__edit-btn-none" do
+          Edit
+    .Wrapper--chat-contents--main
+      .Wrapper--chat-contents--main-message
+        .Wrapper--chat-contents--main-message__info
+          %p{class: "Wrapper--chat-contents--main-message__info-user-name"}
+            test-user
+          %p{class: "Wrapper--chat-contents--main-message__info-date"}
+            2019/06/23(Sun) 00:18:49
+        %p{class: "Wrapper--chat-contents--main-message__text"}
+          こんにちは！
+      .Wrapper--chat-contents--main-message
+        .Wrapper--chat-contents--main-message__info
+          %p{class: "Wrapper--chat-contents--main-message__info-user-name"}
+            test-user2
+          %p{class: "Wrapper--chat-contents--main-message__info-date"}
+            2019/06/24(Mon) 08:20:50
+        %p{class: "Wrapper--chat-contents--main-message__text"}
+          さよなら
+    .Wrapper--chat-contents--form
+      .Wrapper--chat-contents--form-new-message
+        %form{class: "Wrapper--chat-contents--form-new-message__input-box", enctype: "multipart/form-data", method: "post"}
+          %input{class: "Wrapper--chat-contents--form-new-message__input-box-text", placeholder: "type a message", type: "text"}
+          %label{class: "Wrapper--chat-contents--form-new-message__input-box-image", for: "message_image"}
+            %i{class: "Wrapper--chat-contents--form-new-message__input-box-image__fa fa-image"}
+            %input{class: "Wrapper--chat-contents--form-new-message__input-box-image__file", type: "file", id: "message_image"}
+          %input{class: "Wrapper--chat-contents--form-new-message__input-box-submit-btn", type: "submit", value: "Send"}

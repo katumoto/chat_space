@@ -1,0 +1,178 @@
+@mixin font-size($font-size) {
+  font-size: $font-size;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+.Wrapper {
+  height: 100%;
+  &--chat-list {
+    height: 100%;
+    width: 300px;
+    float: left;
+    color: $fontWhiteColor;
+    font-weight: bold;
+    &-header {
+      padding: 0 20px;
+      background-color: #253141;
+      @include font-size(16px);
+      height: 100px;
+      line-height: 100px;
+      &--header-box {
+        width: 100%;
+        &__name {
+          float: left;
+        }
+        &__menu {
+          float: right;
+          &-new-group {
+            float: left;
+            margin-left: 5px;
+            .fa-edit {
+              color: $fontWhiteColor;
+            }
+          }
+          &-edit-account {
+            float: left;
+            margin-left: 5px;
+            .fa-cog {
+              color: $fontWhiteColor;
+            }
+          }
+        }
+      }
+    }
+    &-groups {
+      height: calc(100vh - 100px);
+      background-color: #2f3e51;
+      padding: 20px 20px 0 20px; 
+      &__group {
+        &-name {
+          @include font-size(15px);
+          padding-bottom: 5px;
+        }       
+        &-message {
+          @include font-size(11px);
+          padding-bottom: 40px;
+        }
+      }
+    }
+  }
+
+  &--chat-contents {
+    height: 100%;
+    width: calc(100vw - 300px);
+    float: left;
+    &--title {
+      height: 100px;
+      padding: 0 40px;
+      display: flex;
+      border-bottom: 1px solid #eeeeee;
+      position: relative;
+      &-text-box {
+        padding-top: 35px;
+        position: absolute;
+        &__name {
+          @include font-size(20px);
+          color: #333333;
+          padding-bottom: 15px;
+        }
+        &__member {
+          @include font-size(12px);
+          color: #999999;
+        }
+      }
+      &-text-box__edit-btn {
+        height: 40px;
+        line-height: 40px;
+        padding: 0 20px;
+        margin-top: 28px;
+        border: solid 1px $editBtnColor;
+        position: absolute;
+        right: 40px;
+        &-none {
+          text-decoration: none;
+          color: $editBtnColor;
+        }
+      }
+    }
+    &--main {
+      height: calc(100vh - 190px);
+      padding: 46px 40px;
+      background-color: #fafafa;
+      &-message {
+        padding-bottom: 40px;
+        &__info {
+          display: flex;
+          margin-bottom: 10px;
+          &-user-name {
+            color: #434a54;
+            @include font-size(16px);
+            font-weight: bold;
+          }
+          &-date {
+            color: #999999;
+            @include font-size(12px);
+            margin-left: 10px;
+          }
+        }
+        &__text {
+          color: #434a54;
+          @include font-size(14px);
+        }
+      }
+    }
+    &--form {
+      height: 90px;
+      padding: 20px 40px;
+      background-color: #ddd;
+      &-new-message {
+        &__input-box {
+          width: 100%;
+          display: flex;
+          position: relative;
+          &-text {
+            height: 50px;
+            width: 100%;
+            padding: 0 40px 0 10px;
+            @include font-size(16px);
+            color: #434a54;
+          }
+          &-image {
+            font-size: 1.5rem;
+            position: absolute;
+            top: 10px;
+            right: 120px;
+            cursor: pointer;
+            &__fa {
+              display: inline-block;
+              font: normal normal normal 14px/1 FontAwesome;
+              font-size: inherit;
+              text-rendering: auto;
+              -webkit-font-smoothing: antialiased;
+              -moz-osx-font-smoothing: grayscale;
+              transform: translate(0, 0);
+            }
+            &__file {
+              display: none;
+            }
+          }
+          &-submit-btn {
+            height: 50px;
+            width: 100px;
+            margin-left: 15px;
+            background-color: #38aef0;
+            color: $fontWhiteColor;
+            cursor: pointer;   
+          }
+        }
+      }
+    }
+  }
+}
