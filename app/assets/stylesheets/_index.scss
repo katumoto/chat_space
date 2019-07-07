@@ -53,13 +53,16 @@ html, body {
       background-color: #2f3e51;
       padding: 20px 20px 0 20px; 
       &__group {
+        box-sizing: border-box;
         &-name {
           @include font-size(15px);
           padding-bottom: 5px;
+          color: $fontWhiteColor;
         }       
         &-message {
           @include font-size(11px);
           padding-bottom: 40px;
+          color: $fontWhiteColor;
         }
       }
     }
