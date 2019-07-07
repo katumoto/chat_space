@@ -3,13 +3,13 @@
     .Wrapper--chat-list-header
       .Wrapper--chat-list-header--header-box
         %p{class: "Wrapper--chat-list-header--header-box__name"}
-          test-user
+          = current_user.name
         %ul{class: "Wrapper--chat-list-header--header-box__menu"}
           %li{class: "Wrapper--chat-list-header--header-box__menu-new-group"}
             = link_to "/" do
               %i.fa.fa-edit
           %li{class: "Wrapper--chat-list-header--header-box__menu-edit-account"}
-            = link_to "/" do
+            = link_to edit_user_path(current_user) do
               %i.fa.fa-cog
 
     .Wrapper--chat-list-groups
