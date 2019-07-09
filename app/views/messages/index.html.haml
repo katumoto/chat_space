@@ -6,7 +6,7 @@
           = current_user.name
         %ul{class: "Wrapper--chat-list-header--header-box__menu"}
           %li{class: "Wrapper--chat-list-header--header-box__menu-new-group"}
-            = link_to "/" do
+            = link_to new_group_path do
               %i.fa.fa-edit
           %li{class: "Wrapper--chat-list-header--header-box__menu-edit-account"}
             = link_to edit_user_path(current_user) do
@@ -14,15 +14,13 @@
 
     .Wrapper--chat-list-groups
       .Wrapper--chat-list-groups__group
-        %p{class: "Wrapper--chat-list-groups__group-name"} test-group
-        %p{class: "Wrapper--chat-list-groups__group-message"} さようなら
-      .Wrapper--chat-list-groups__group
-        %p{class: "Wrapper--chat-list-groups__group-name"} sample-group
-        %p{class: "Wrapper--chat-list-groups__group-message"} hello!
-      .Wrapper--chat-list-groups__group
-        %p{class: "Wrapper--chat-list-groups__group-name"} example
-        %p{class: "Wrapper--chat-list-groups__group-message"} まだメッセージはありません
-
+        - current_user.groups.each do |group|
+          = link_to group_messages_path(group) do
+            .Wrapper--chat-list-groups__group-name
+              = group.name 
+            .Wrapper--chat-list-groups__group-message
+              メッセージはまだありません
+  
   .Wrapper--chat-contents
     .Wrapper--chat-contents--title
       .Wrapper--chat-contents--title-text-box
