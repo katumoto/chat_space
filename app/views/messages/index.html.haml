@@ -1,26 +1,5 @@
 .Wrapper
   = render 'shared/side_bar'
-  -# .Wrapper--chat-list
-  -#   .Wrapper--chat-list-header
-  -#     .Wrapper--chat-list-header--header-box
-  -#       %p{class: "Wrapper--chat-list-header--header-box__name"}
-  -#         = current_user.name
-  -#       %ul{class: "Wrapper--chat-list-header--header-box__menu"}
-  -#         %li{class: "Wrapper--chat-list-header--header-box__menu-new-group"}
-  -#           = link_to new_group_path do
-  -#             %i.fa.fa-edit
-  -#         %li{class: "Wrapper--chat-list-header--header-box__menu-edit-account"}
-  -#           = link_to edit_user_path(current_user) do
-  -#             %i.fa.fa-cog
-
-  -#   .Wrapper--chat-list-groups
-  -#     .Wrapper--chat-list-groups__group
-  -#       - current_user.groups.each do |group|
-  -#         = link_to group_messages_path(group) do
-  -#           .Wrapper--chat-list-groups__group-name
-  -#             = group.name 
-  -#           .Wrapper--chat-list-groups__group-message
-  -#             メッセージはまだありません
   
   .Wrapper--chat-contents
     .Wrapper--chat-contents--title
@@ -35,28 +14,15 @@
       .Wrapper--chat-contents--title-text-box__edit-btn
         = link_to "/", class: "Wrapper--chat-contents--title-text-box__edit-btn-none" do
           Edit
+
     .Wrapper--chat-contents--main
-      .Wrapper--chat-contents--main-message
-        .Wrapper--chat-contents--main-message__info
-          %p{class: "Wrapper--chat-contents--main-message__info-user-name"}
-            test-user
-          %p{class: "Wrapper--chat-contents--main-message__info-date"}
-            2019/06/23(Sun) 00:18:49
-        %p{class: "Wrapper--chat-contents--main-message__text"}
-          こんにちは！
-      .Wrapper--chat-contents--main-message
-        .Wrapper--chat-contents--main-message__info
-          %p{class: "Wrapper--chat-contents--main-message__info-user-name"}
-            test-user2
-          %p{class: "Wrapper--chat-contents--main-message__info-date"}
-            2019/06/24(Mon) 08:20:50
-        %p{class: "Wrapper--chat-contents--main-message__text"}
-          さよなら
-    .Wrapper--chat-contents--form
-      .Wrapper--chat-contents--form-new-message
-        %form{class: "Wrapper--chat-contents--form-new-message__input-box", enctype: "multipart/form-data", method: "post"}
-          %input{class: "Wrapper--chat-contents--form-new-message__input-box-text", placeholder: "type a message", type: "text"}
-          %label{class: "Wrapper--chat-contents--form-new-message__input-box-image", for: "message_image"}
-            %i{class: "Wrapper--chat-contents--form-new-message__input-box-image__fa fa-image"}
-            %input{class: "Wrapper--chat-contents--form-new-message__input-box-image__file", type: "file", id: "message_image"}
-          %input{class: "Wrapper--chat-contents--form-new-message__input-box-submit-btn", type: "submit", value: "Send"}
+      = render partial: 'message', collection: @messages
+      
+    .form
+      = form_for [@group, @message] do |f|
+        = f.text_field :body, class: 'form__message', placeholder: 'type a message'
+        .form__mask
+          = f.label :image, class: 'form__mask__image' do
+            = fa_icon 'picture-o', class: 'icon'
+            = f.file_field :image, class: 'hidden'
+        = f.submit 'Send', class: 'form__submit'
