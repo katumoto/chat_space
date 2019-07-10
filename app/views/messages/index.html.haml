@@ -1,31 +1,36 @@
 .Wrapper
-  .Wrapper--chat-list
-    .Wrapper--chat-list-header
-      .Wrapper--chat-list-header--header-box
-        %p{class: "Wrapper--chat-list-header--header-box__name"}
-          = current_user.name
-        %ul{class: "Wrapper--chat-list-header--header-box__menu"}
-          %li{class: "Wrapper--chat-list-header--header-box__menu-new-group"}
-            = link_to new_group_path do
-              %i.fa.fa-edit
-          %li{class: "Wrapper--chat-list-header--header-box__menu-edit-account"}
-            = link_to edit_user_path(current_user) do
-              %i.fa.fa-cog
+  = render 'shared/side_bar'
+  -# .Wrapper--chat-list
+  -#   .Wrapper--chat-list-header
+  -#     .Wrapper--chat-list-header--header-box
+  -#       %p{class: "Wrapper--chat-list-header--header-box__name"}
+  -#         = current_user.name
+  -#       %ul{class: "Wrapper--chat-list-header--header-box__menu"}
+  -#         %li{class: "Wrapper--chat-list-header--header-box__menu-new-group"}
+  -#           = link_to new_group_path do
+  -#             %i.fa.fa-edit
+  -#         %li{class: "Wrapper--chat-list-header--header-box__menu-edit-account"}
+  -#           = link_to edit_user_path(current_user) do
+  -#             %i.fa.fa-cog
 
-    .Wrapper--chat-list-groups
-      .Wrapper--chat-list-groups__group
-        - current_user.groups.each do |group|
-          = link_to group_messages_path(group) do
-            .Wrapper--chat-list-groups__group-name
-              = group.name 
-            .Wrapper--chat-list-groups__group-message
-              メッセージはまだありません
+  -#   .Wrapper--chat-list-groups
+  -#     .Wrapper--chat-list-groups__group
+  -#       - current_user.groups.each do |group|
+  -#         = link_to group_messages_path(group) do
+  -#           .Wrapper--chat-list-groups__group-name
+  -#             = group.name 
+  -#           .Wrapper--chat-list-groups__group-message
+  -#             メッセージはまだありません
   
   .Wrapper--chat-contents
     .Wrapper--chat-contents--title
       .Wrapper--chat-contents--title-text-box
-        %p{class: "Wrapper--chat-contents--title-text-box__name"} サンプル
-        %p{class: "Wrapper--chat-contents--title-text-box__member"} member : test-user
+        .Wrapper--chat-contents--title-text-box__name
+          サンプル
+        %ul.Wrapper--chat-contents--title-text-box__members
+          Member:
+          %li.member
+            test-user
 
       .Wrapper--chat-contents--title-text-box__edit-btn
         = link_to "/", class: "Wrapper--chat-contents--title-text-box__edit-btn-none" do
