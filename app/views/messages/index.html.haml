@@ -5,12 +5,13 @@
     .Wrapper--chat-contents--title
       .Wrapper--chat-contents--title-text-box
         .Wrapper--chat-contents--title-text-box__name
-          サンプル
+          = @group.name
         %ul.Wrapper--chat-contents--title-text-box__members
-          Member:
+          Member :
           %li.member
-            test-user
-
+            - @group.users.each do |user|
+              = user.name
+            
       .Wrapper--chat-contents--title-text-box__edit-btn
         = link_to "/", class: "Wrapper--chat-contents--title-text-box__edit-btn-none" do
           Edit
