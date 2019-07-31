@@ -43,7 +43,7 @@ $(function() {
       var html = buildHTML(data);
       $('.Wrapper--chat-contents--main').append(html);
       scrollDown();
-      $('#message_body').val('');
+      $('#new_message')[0].reset();
       $(".form__submit").removeAttr("disabled");
     })
     .fail(function(){
