@@ -23,9 +23,15 @@
       %label.chat-group-form__label{ for: "chat_group_チャットメンバー" } チャットメンバー
     .chat-group-form__field--right
       #chat-group-users
-        #chat-group-user-22.chat-group-user.clearfix
-      %input{ name: 'chat_group[user_ids][]', type: 'hidden', value: '22'}
-      %p.chat-group-user__name #{ current_user.name }
+        #chat-group-user.chat-group-user.clearfix{ id: "chat-group-user-#{current_user.id}" } 
+          %input{ name: 'group[user_ids][]', type: "hidden", value: current_user.id}
+          %p.chat-group-user__name #{ current_user.name }
+        - group.users.each do |user|
+          - if user.id != current_user.id
+            #chat-group-user.chat-group-user.clearfix.js-chat-member{ id: "chat-group-user-#{user.id}" } 
+              %input{ name: "group[user_ids][]", type: "hidden", value: user.id } 
+              %p.chat-group-user__name #{user.name}
+              .user-search-remove.chat-group-user__btn.chat-group-user__btn--remove.js-remove-btn 削除
   .chat-group-form__field.clearfix
     .chat-group-form__field--left
     .chat-group-form__field--right
