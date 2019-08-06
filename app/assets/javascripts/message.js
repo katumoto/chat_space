@@ -23,22 +23,22 @@ $(function() {
 
   function buildMessageHTML(message){
     var image = message.image ? `<img class="lower-message__image" src=`+ message.image + `>` : "" ;
-    var html = `<div class="Wrapper--chat-contents--main-message" data-message-id=`+ message.id + `>` +
-                  `<div class="Wrapper--chat-contents--main-message__info">` +
-                    `<div class="Wrapper--chat-contents--main-message__info-user-name">` +
-                      message.user_name +
-                    `</div>` +
-                    `<div class="Wrapper--chat-contents--main-message__info-date">` +
-                      message.time +
-                    `</div>` +
-                  `</div>` +
-                  `<div class="Wrapper--chat-contents--main-message__text">` +
-                    `<p class="lower-message__content">` +
-                      message.body +
-                    `</p>` +
-                    image +
-                  `</div>` +
-                `</div>`
+    var html = `<div class="Wrapper--chat-contents--main-message" data-message-id=`+ message.id + `>
+                  <div class="Wrapper--chat-contents--main-message__info">
+                    <div class="Wrapper--chat-contents--main-message__info-user-name">`
+                      + message.user_name + `\n
+                  </div>
+                    <div class="Wrapper--chat-contents--main-message__info-date">`
+                      + message.time + `\n
+                  </div>
+                  </div>
+                  <div class="Wrapper--chat-contents--main-message__text">
+                    <p class="lower-message__content">`
+                      + message.body + `\n
+                    </p>`
+                    + image + `\n
+                  </div>
+                </div>`
     return html;
   }
 
