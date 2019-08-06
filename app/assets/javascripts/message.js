@@ -82,7 +82,7 @@ $(function() {
       })
       .done(function(messages) { 
         var insertHTML = ''; 
-        messages.forEach(function(message){ 
+        messages.forEach(function(message){
           insertHTML = buildMessageHTML(message);
           $('.Wrapper--chat-contents--main').append(insertHTML);
           scrollDown();
