@@ -4,7 +4,7 @@
   .Wrapper--chat-contents
     .Wrapper--chat-contents--title
       .Wrapper--chat-contents--title-text-box
-        .Wrapper--chat-contents--title-text-box__name
+        .Wrapper--chat-contents--title-text-box__name{ "data-group-id": "#{@group.id}"}
           = @group.name
         %ul.Wrapper--chat-contents--title-text-box__members
           Member :

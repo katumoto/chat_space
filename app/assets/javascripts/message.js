@@ -1,15 +1,36 @@
 $(function() {
   
-  function buildHTML(message){
-    var image = message.image ? `<img class="lower-message__image" src=${message.image}>` : "";
-    var html = `<div class="Wrapper--chat-contents--main-message">
+  function buildHTML(data){
+    var image = data.image ? `<img class="lower-message__image" src=${data.image}>` : "";
+    var html = `<div class="Wrapper--chat-contents--main-message" data-message-id=${data.id}>
+                  <div class="Wrapper--chat-contents--main-message__info">
+                    <div class="Wrapper--chat-contents--main-message__info-user-name">
+                      ${data.user_name}
+                    </div>
+                    <div class="Wrapper--chat-contents--main-message__info-date">
+                      ${data.time}
+                    </div>
+                  </div>
+                  <div class="Wrapper--chat-contents--main-message__text">
+                    <p class="lower-message__content">
+                      ${data.body}
+                    </p>
+                    ${image}
+                  </div>
+                </div>`
+    return html;
+  }
+
+  function buildMessageHTML(message){
+    var image = message.image ? `<img class="lower-message__image" src=${message.image}>` : "" ;
+    var html = `<div class="Wrapper--chat-contents--main-message" data-message-id=${message.id}>
                   <div class="Wrapper--chat-contents--main-message__info">
                     <div class="Wrapper--chat-contents--main-message__info-user-name">
                       ${message.user_name}
-                    </div>
+                  </div>
                     <div class="Wrapper--chat-contents--main-message__info-date">
                       ${message.time}
-                    </div>
+                  </div>
                   </div>
                   <div class="Wrapper--chat-contents--main-message__text">
                     <p class="lower-message__content">
@@ -18,13 +39,12 @@ $(function() {
                     ${image}
                   </div>
                 </div>`
-    return html
+    return html;
   }
 
   function scrollDown(){
     $('.Wrapper--chat-contents--main').animate({ 
-      scrollTop: $('.Wrapper--chat-contents--main')[0].scrollHeight
-    });
+      scrollTop: $('.Wrapper--chat-contents--main')[0].scrollHeight}, 'fast');
   }
 
   $('#new_message').on('submit', function(e){
@@ -39,7 +59,7 @@ $(function() {
       processData: false,
       contentType: false
     })
-    .done(function(data){
+    .done(function(data){ 
       var html = buildHTML(data);
       $('.Wrapper--chat-contents--main').append(html);
       scrollDown();
@@ -50,4 +70,29 @@ $(function() {
       alert('error');
     })
   });
+
+  var reloadMessages = function() {
+    if (window.location.href.match(/\/groups\/\d+\/messages/)){
+      var last_message_id = $('.Wrapper--chat-contents--main-message:last').data('message-id');
+      $.ajax({
+        url: "api/messages",
+        type: 'GET',
+        dataType: 'json',
+        data: {id: last_message_id}
+      })
+      .done(function(messages) { 
+        var insertHTML = ''; 
+        messages.forEach(function(message){
+          insertHTML = buildMessageHTML(message);
+          $('.Wrapper--chat-contents--main').append(insertHTML);
+          scrollDown();
+        });
+      })
+      .fail(function() {
+        alert('error');
+      })
+    }}
+    $(function(){
+      setInterval(reloadMessages, 5000);
+    });
 });
